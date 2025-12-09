@@ -217,3 +217,25 @@ class InterfazSnake:
             overlay.fill((0, 0, 0, 120))
             self.pantalla.blit(overlay, (0, 0))
             self._dibujar_texto("Pausa", (self.control.conf.ancho // 2 - 40, self.control.conf.alto // 2 - 20), grande=True)
+
+    def dibujar(self) -> None:
+        self.pantalla.fill(self.control.conf.color_fondo)
+        self._dibujar_cuadricula()
+        self._dibujar_comida()
+        self._dibujar_serpiente()
+        self._dibujar_ui()
+        self._dibujar_overlays()
+        pygame.display.flip()
+
+    def ejecutar(self) -> None:
+        """Bucle principal del juego."""
+        corriendo = True
+        while corriendo:
+            corriendo = self._manejar_eventos()
+            self.control.actualizar()
+            self.dibujar()
+            self.reloj.tick(self.control.velocidad_actual())
+
+        pygame.quit()
+        sys.exit()
+
