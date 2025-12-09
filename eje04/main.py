@@ -239,3 +239,35 @@ class InterfazSnake:
         pygame.quit()
         sys.exit()
 
+
+# ============================================================================
+# Demostracion del patron Singleton
+# ============================================================================
+
+
+def demostrar_singleton() -> None:
+    print("=" * 60)
+    print("DEMOSTRACION DEL PATRON SINGLETON")
+    print("=" * 60)
+
+    a = ControlJuego()
+    b = ControlJuego()
+    print(f"Instancia a: {id(a)}")
+    print(f"Instancia b: {id(b)}")
+    print(f"Misma referencia: {a is b}")
+
+    a.puntaje = 40
+    print(f"Puntaje visto desde a: {a.puntaje}")
+    print(f"Puntaje visto desde b: {b.puntaje}")
+    print("Iniciando juego...\n")
+
+
+# ============================================================================
+# Ejecucion principal
+# ============================================================================
+
+
+if __name__ == "__main__":
+    demostrar_singleton()
+    InterfazSnake().ejecutar()
+
