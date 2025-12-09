@@ -51,3 +51,29 @@ Patrón Singleton correctamente implementado con metaclase que usa Double-Checke
 ## Conclusiones
 
 El patrón Singleton proporciona un mecanismo robusto para garantizar la existencia de una única instancia y centralizar acceso a recursos compartidos. La implementación con metaclase proporciona elegancia y automatización. El Double-Checked Locking asegura thread-safety sin sacrificar rendimiento significativamente. El patrón es especialmente útil para gestionar configuraciones globales, acceso a bases de datos, logging y estado de aplicaciones. Las pruebas demuestran que incluso bajo estrés extremo (10,000 operaciones concurrentes), el patrón mantiene integridad de datos perfecta.
+
+---
+
+## Solución del Cuestionario
+
+### 1. ¿Qué desventajas tiene el patrón Singleton en pruebas unitarias?
+
+La principal desventaja es que introduce un estado global que persiste entre pruebas. Si un test modifica el Singleton, el siguiente test recibirá ese estado modificado, rompiendo el aislamiento de las pruebas. Además, al ser una llamada estática directa dentro de las clases, es difícil de sustituir por objetos simulados ("mocks").
+
+### 2. ¿Cuándo no es recomendable usar Singleton?
+
+No es recomendable cuando:
+
+La unicidad no es un requisito estricto del negocio, sino solo una conveniencia para acceder a datos globalmente (mal uso como "variable global glorificada").
+
+En sistemas altamente distribuidos o clusterizados donde el Singleton reside solo en la memoria de un servidor.
+
+Cuando se necesita control estricto de dependencias y se prefiere la Inyección de Dependencias (DI).
+
+### 3. ¿Cómo se diferencia de una clase estática?
+
+Herencia e Interfaces: Un Singleton es un objeto real, por lo que puede heredar de otras clases e implementar interfaces (polimorfismo). Una clase estática no.
+
+Inicialización Perezosa (Lazy): El Singleton se puede inicializar solo cuando se necesita por primera vez; la clase estática suele cargarse al inicio del programa.
+
+Paso por Parámetro: Un Singleton puede pasarse como argumento a métodos que esperen un objeto; una clase estática no.
